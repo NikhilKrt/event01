@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventPro Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(45deg, #FF416C, #FF4B2B);
+            --secondary-gradient: linear-gradient(45deg, #8E2DE2, #4A00E0);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-gradient);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.1);
+        }
+
+        /* Banner */
+        .banner {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+        }
+
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="rgba(255,255,255,0.8)"/></svg>');
+            background-size: cover;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1000px; }
+        }
+
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary-gradient);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* About Us */
+        .about-us {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        /* Events */
+        .events {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-info {
+            padding: 1.5rem;
+        }
+
+        .event-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .event-card:hover .event-overlay {
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-links">
+            <a href="#about">About Us</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner-slide active">
+            <img src="./imgs/WA0010.jpg" alt="Event 1">
+        </div>
+        <div class="banner-slide">
+            <img src="./imgs/WA0012.jpg" alt="Event 2">
+        </div>
+        <div class="banner-slide">
+            <img src="./imgs/WA0014.jpg" alt="Event 2">
+        </div>
+        <div class="banner-slide">
+            <img src="./imgs/WA0011.jpg" alt="Event 2">
+        </div>
+        <!-- <div class="wave"></div> -->
+        <div class="banner-content">
+            <h1>Creating Unforgettable Moments</h1>
+            <p>Your premier event management partner</p>
+            <button class="btn">Learn More</button>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="about-us">
+        <h2>About Us</h2>
+        <p>We are passionate about creating extraordinary events that leave lasting impressions. With years of experience and dedication to excellence, we transform your vision into reality.</p>
+        <button class="btn">Contact Us</button>
+    </section>
+
+    <!-- Events -->
+    <section id="events" class="events">
+        <h2>Event Highlights</h2>
+        <div class="events-grid">
+            <div class="event-card">
+                <img src="./imgs/WA0012.jpg" alt="Weddings">
+                <div class="event-info">
+                    <h3>Weddings</h3>
+                    <p>Creating magical moments for your special day</p>
+                </div>
+                <div class="event-overlay">
+                    <p>Our wedding planning services ensure every detail is perfect, from venue selection to the final dance. We create personalized experiences that reflect your love story.</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="./imgs/corop03.jpg" alt="Corporate">
+                <div class="event-info">
+                    <h3>Corporate Events</h3>
+                    <p>Professional events that leave an impact</p>
+                </div>
+                <div class="event-overlay">
+                    <p>From conferences to team building events, we deliver professional and engaging corporate events that align with your business objectives.</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="./imgs/celeb01.jpg" alt="Birthday">
+                <div class="event-info">
+                    <h3>Birthday Parties</h3>
+                    <p>Celebrations that create memories</p>
+                </div>
+                <div class="event-overlay">
+                    <p>Make your birthday celebration unique with our creative themes, entertainment options, and personalized decorations.</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="./imgs/fest.jpg" alt="Festival">
+                <div class="event-info">
+                    <h3>Festivals</h3>
+                    <p>Large-scale events that bring people together</p>
+                </div>
+                <div class="event-overlay">
+                    <p>We organize vibrant festivals that celebrate culture, music, and community, creating unforgettable experiences for all attendees.</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="./imgs/WA0022.jpg" alt="Social">
+                <div class="event-info">
+                    <h3>Exhibitions</h3>
+                    <p>From art shows and product launches</p>
+                </div>
+                <div class="event-overlay">
+                    <p>From art shows and product launches, etc. we help you setup your exhibition stalls, decorated according to your personal prefrence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: info@eventpro.com</p>
+        <p>Phone: (555) 123-4567</p>
+    </footer>
+
+    <script>
+        // Banner Slideshow
+        const slides = document.querySelectorAll('.banner-slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
